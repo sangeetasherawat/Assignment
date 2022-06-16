@@ -24,7 +24,8 @@ const styles = StyleSheet.create({
     header_item:
     {
         alignSelf: 'flex-start',
-		borderRadius: 20
+		borderRadius: 20,
+        backgroundColor: '#EEEEEE'
     },
     close_icon:
 	{
@@ -78,8 +79,10 @@ const styles = StyleSheet.create({
 	},
     cardImage:
     {
-        width:wp('20%'),
-        height:hp('10%')
+        width:wp('30%'),
+        height:hp('10%'),
+        alignSelf: 'flex-start',
+		marginRight: wp(3),
     },
     card_item:
 	{

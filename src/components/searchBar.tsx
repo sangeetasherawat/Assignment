@@ -1,6 +1,6 @@
 import React from 'react';
-import { View,TouchableOpacity } from 'react-native';
-import { Icon,Header, Item, Input } from 'native-base';
+import { View, TouchableOpacity } from 'react-native';
+import { Icon, Header, Item, Input } from 'native-base';
 import { Platform } from 'react-native';
 import styles from '../containers/home/style';
 
@@ -40,17 +40,17 @@ const Searchbar: React.FC<SearchProps> = (props) => {
 
                         value={props.searchTerm}
                     />
-                    {props.searchTerm !== '' && Platform.OS!=='ios' ? (
+                    {props.searchTerm !== '' && Platform.OS !== 'ios' ? (
                         <TouchableOpacity
                             onPress={() => props.onSearch('')}
                             style={styles.clearSearch}>
-                           
-                                <Icon
-                                   color='white'
-                                    name="ios-close"
-                                    style={styles.close_icon}
-                                />
-                          
+
+                            <Icon
+                                color='white'
+                                name="ios-close"
+                                style={styles.close_icon}
+                            />
+
                         </TouchableOpacity>) : null}
 
 

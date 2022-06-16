@@ -10,8 +10,9 @@ import ListFooter from '../../components/listFooter';
 import NoResultView from '../../components/noResultView';
 import styles from './style';
 import { IGifData, IPaginationData } from '../../store/home/type';
-import { useDispatch } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { getGifList } from '../../store/home/action';
+import IAppState from '../../store/common/state';
 
 export interface GIFListProps {
     data: Array<IGifData>;
@@ -42,6 +43,8 @@ const GIFList: React.FC<GIFListProps> = props => {
     }
     return (
         <View style={styles.container}>
+            <Searchbar searchTerm={searchTerm} onSearch={(value) => setSearchTerm(value)} />
+            {props.showLoader ? <ActivityIndicator size='small' /> : null}
             <View
                 style={styles.childView}>
                 {props.data.length !== 0 ? <Text
@@ -91,4 +94,21 @@ const GIFList: React.FC<GIFListProps> = props => {
     );
 }
 
-export default GIFList;
+const mapStateToProps=(state:IAppState)=>
+{
+    console.log('gif state list data',state.gifListState);
+    return{
+        data:state.gifListState.data,
+        pagination:state.gifListState.pagination,
+        showLoader:state.gifListState.showLoader
+    }
+
+}
+
+const mapDispatchToProps = (dispatch: any) => {
+	return {
+
+	}
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(GIFList);
