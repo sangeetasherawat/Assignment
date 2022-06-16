@@ -13,6 +13,7 @@ import { IGifData, IPaginationData } from '../../store/home/type';
 import { connect, useDispatch } from 'react-redux';
 import { getGifList } from '../../store/home/action';
 import IAppState from '../../store/common/state';
+import { debounceSearch } from '../../utils/debounceUtil';
 
 export interface GIFListProps {
     data: Array<IGifData>;
@@ -24,23 +25,25 @@ export interface GIFListProps {
 const GIFList: React.FC<GIFListProps> = props => {
     const dispatch = useDispatch();
     const [pageSize, setPageSize] = useState(10);
-    const [searchTerm, setSearchTerm] = useState('');
+    const [searchTerm, setSearchTerm] = useState('gif');
 
     const onLoadmore = (size: number) => {
         setPageSize(size);
     }
     useEffect(() => {
-        fetchGifList();
+        callDebounceFunc();
 
-    }, [searchTerm]);
+    }, [searchTerm,pageSize]);
 
     const fetchGifList = () => {
         var payloaddata = {
             q: searchTerm,
             limit: pageSize,
-        }
+        };
         dispatch(getGifList(payloaddata))
     }
+    const callDebounceFunc = debounceSearch(fetchGifList, 1000);
+    
     return (
         <View style={styles.container}>
             <Searchbar searchTerm={searchTerm} onSearch={(value) => setSearchTerm(value)} />

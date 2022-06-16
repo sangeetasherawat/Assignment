@@ -129,7 +129,8 @@ const styles = StyleSheet.create({
 	{
 		fontSize: hp(1.5),
 		paddingHorizontal: wp(2),
-		color: '#008B8B'
+		color: '#008B8B',
+        marginBottom:hp(1)
 	},
     list_style:
 	{
